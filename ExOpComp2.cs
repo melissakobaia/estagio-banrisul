@@ -6,7 +6,6 @@ namespace ExOpComp2
     {
         static void Main(string[] args)
         {
-
             Console.Write("Digite uma senha: "); 
             string senhaDigitada = Console.ReadLine();
 
@@ -16,3 +15,4 @@ namespace ExOpComp2
         }
     }
 }
+
