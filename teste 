@@ -10,17 +10,17 @@ namespace FormasGeometricas
             Console.WriteLine("=== Formas Geométricas ===\n");
 
             Retangulo ret = new Retangulo(5, 3);
-            Console.WriteLine($"Retângulo: base = {ret.Base}, altura = {ret.Altura}");
+            Console.WriteLine($"Retângulo: base = {ret.baseRet}, altura = {ret.altura}");
             Console.WriteLine($"Área: {ret.CalcularArea():F2}");
             Console.WriteLine($"Perímetro: {ret.CalcularPerimetro():F2}\n");
 
             Quadrado quad = new Quadrado(4);
-            Console.WriteLine($"Quadrado: lado = {quad.Lado}");
+            Console.WriteLine($"Quadrado: lado = {quad.lado}");
             Console.WriteLine($"Área: {quad.CalcularArea():F2}");
             Console.WriteLine($"Perímetro: {quad.CalcularPerimetro():F2}\n");
 
             Circulo circ = new Circulo(2.5);
-            Console.WriteLine($"Círculo: raio = {circ.Raio}");
+            Console.WriteLine($"Círculo: raio = {circ.raio}");
             Console.WriteLine($"Área: {circ.CalcularArea():F2}");
             Console.WriteLine($"Perímetro: {circ.CalcularPerimetro():F2}\n");
 
@@ -39,65 +39,65 @@ namespace FormasGeometricas
     // Classe Retângulo
     class Retangulo : FormaGeometrica
     {
-        public double Base { get; set; }
-        public double Altura { get; set; }
+        public double baseRet;
+        public double altura;
 
         public Retangulo(double b, double h)
         {
-            Base = b;
-            Altura = h;
+            baseRet = b;
+            altura = h;
         }
 
         public override double CalcularArea()
         {
-            return Base * Altura;
+            return baseRet * altura;
         }
 
         public override double CalcularPerimetro()
         {
-            return 2 * (Base + Altura);
+            return 2 * (baseRet + altura);
         }
     }
 
     // Classe Quadrado
     class Quadrado : FormaGeometrica
     {
-        public double Lado { get; set; }
+        public double lado;
 
-        public Quadrado(double lado)
+        public Quadrado(double l)
         {
-            Lado = lado;
+            lado = l;
         }
 
         public override double CalcularArea()
         {
-            return Lado * Lado;
+            return lado * lado;
         }
 
         public override double CalcularPerimetro()
         {
-            return 4 * Lado;
+            return 4 * lado;
         }
     }
 
     // Classe Círculo
     class Circulo : FormaGeometrica
     {
-        public double Raio { get; set; }
+        public double raio;
 
-        public Circulo(double raio)
+        public Circulo(double r)
         {
-            Raio = raio;
+            raio = r;
         }
 
         public override double CalcularArea()
         {
-            return Math.PI * Raio * Raio;
+            return Math.PI * raio * raio;
         }
 
         public override double CalcularPerimetro()
         {
-            return 2 * Math.PI * Raio;
+            return 2 * Math.PI * raio;
         }
     }
 }
