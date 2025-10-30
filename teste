@@ -1,0 +1,91 @@
+using System;
+
+namespace SistemaReservas
+{
+    class Reserva
+    {
+        // Propriedades
+        public string NomeCliente { get; private set; }
+        public int NumeroQuarto { get; private set; }
+        public int NumeroDias { get; private set; }
+        public double ValorDiaria { get; private set; }
+        public double ValorTotal { get; private set; }
+        public string Status { get; private set; }
+
+        // === CONSTRUTORES (OVERLOADING) ===
+
+        // 1. Reserva completa
+        public Reserva(string nomeCliente, int numeroQuarto, int numeroDias, double valorDiaria)
+        {
+            NomeCliente = nomeCliente;
+            NumeroQuarto = numeroQuarto;
+            NumeroDias = numeroDias;
+            ValorDiaria = valorDiaria;
+            ValorTotal = numeroDias * valorDiaria;
+            Status = "CONFIRMADA";
+
+            Console.WriteLine("Reserva completa criada com sucesso!\n");
+        }
+
+        // 2. Reserva parcial (sem número de dias)
+        public Reserva(string nomeCliente, int numeroQuarto, double valorDiaria)
+        {
+            NomeCliente = nomeCliente;
+            NumeroQuarto = numeroQuarto;
+            NumeroDias = 2; // mínimo 2 dias
+            ValorDiaria = valorDiaria;
+            ValorTotal = NumeroDias * valorDiaria;
+            Status = "CONFIRMADA";
+
+            Console.WriteLine("Reserva parcial criada com sucesso!\n");
+        }
+
+        // 3. Reserva mínima (sem cliente e sem número de dias)
+        public Reserva(int numeroQuarto, double valorDiaria)
+        {
+            NomeCliente = "A definir";
+            NumeroQuarto = numeroQuarto;
+            NumeroDias = 2; // mínimo 2 dias
+            ValorDiaria = valorDiaria;
+            ValorTotal = NumeroDias * valorDiaria;
+            Status = "PENDENTE";
+
+            Console.WriteLine("Reserva mínima criada com sucesso!\n");
+        }
+
+        // Método para exibir resumo da reserva
+        public void ExibirResumo()
+        {
+            Console.WriteLine($"Cliente: {NomeCliente}");
+            Console.WriteLine($"Quarto: {NumeroQuarto}");
+            Console.WriteLine($"Número de dias: {NumeroDias}");
+            Console.WriteLine($"Valor da diária: R$ {ValorDiaria:F2}");
+            Console.WriteLine($"Valor total: R$ {ValorTotal:F2}");
+            Console.WriteLine($"Status: {Status}");
+            Console.WriteLine();
+        }
+    }
+
+    class App
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=== Sistema de Reservas de Hospedagem ===\n");
+
+            // Exemplo de reserva completa
+            Reserva reserva1 = new Reserva("John Doe", 305, 5, 250.00);
+            reserva1.ExibirResumo();
+
+            // Exemplo de reserva parcial
+            Reserva reserva2 = new Reserva("Maria Silva", 210, 200.00);
+            reserva2.ExibirResumo();
+
+            // Exemplo de reserva mínima
+            Reserva reserva3 = new Reserva(102, 180.00);
+            reserva3.ExibirResumo();
+
+            Console.WriteLine("Pressione qualquer tecla para sair...");
+            Console.ReadKey();
+        }
+    }
+}
