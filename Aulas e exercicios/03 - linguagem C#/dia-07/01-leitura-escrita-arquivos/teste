@@ -1,0 +1,138 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+
+// Estrutura para armazenar estatísticas
+public record TextStats(
+    int TotalLines,
+    int TotalWords,
+    int TotalChars,
+    Dictionary<string, int> WordFrequency
+);
+
+// Classe principal para análise
+public class TextAnalyzer
+{
+    private TextStats stats;
+
+    // Método para ler o arquivo e gerar estatísticas
+    public TextStats AnalyzeFile(string path)
+    {
+        if (!File.Exists(path))
+        {
+            Console.WriteLine("Arquivo não encontrado!");
+            return null;
+        }
+
+        int totalLines = 0;
+        int totalWords = 0;
+        int totalChars = 0;
+        Dictionary<string, int> wordFrequency = new Dictionary<string, int>();
+
+        foreach (string line in File.ReadLines(path))
+        {
+            totalLines++;
+            totalChars += line.Length;
+
+            string[] words = line
+                .ToLower()
+                .Replace(",", "")
+                .Replace(".", "")
+                .Replace("!", "")
+                .Replace("?", "")
+                .Replace(";", "")
+                .Replace(":", "")
+                .Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            totalWords += words.Length;
+
+            foreach (string word in words)
+            {
+                if (wordFrequency.ContainsKey(word))
+                    wordFrequency[word]++;
+                else
+                    wordFrequency[word] = 1;
+            }
+        }
+
+        stats = new TextStats(totalLines, totalWords, totalChars, wordFrequency);
+        return stats;
+    }
+
+    // Método para pegar as palavras mais frequentes
+    public List<KeyValuePair<string, int>> GetTopWords(int count)
+    {
+        if (stats == null)
+        {
+            Console.WriteLine("Nenhum arquivo analisado ainda!");
+            return new List<KeyValuePair<string, int>>();
+        }
+
+        return stats.WordFrequency
+                    .OrderByDescending(w => w.Value)
+                    .Take(count)
+                    .ToList();
+    }
+
+    // Método para salvar relatório
+    public void SaveReport(string outputPath)
+    {
+        if (stats == null)
+        {
+            Console.WriteLine("Nenhum dado para salvar!");
+            return;
+        }
+
+        using (StreamWriter writer = new StreamWriter(outputPath))
+        {
+            writer.WriteLine("=== Relatório de Análise de Texto ===");
+            writer.WriteLine($"Total de Linhas: {stats.TotalLines}");
+            writer.WriteLine($"Total de Palavras: {stats.TotalWords}");
+            writer.WriteLine($"Total de Caracteres: {stats.TotalChars}");
+            writer.WriteLine("\nPalavras mais frequentes:");
+
+            foreach (var item in GetTopWords(10))
+            {
+                writer.WriteLine($"{item.Key}: {item.Value}");
+            }
+        }
+
+        Console.WriteLine($"Relatório salvo em: {outputPath}");
+    }
+}
+
+// Classe para testar o funcionamento
+class App
+{
+    static void Main(string[] args)
+    {
+        TextAnalyzer analyzer = new TextAnalyzer();
+
+        Console.Write("Digite o caminho do arquivo de texto: ");
+        string path = Console.ReadLine();
+
+        TextStats stats = analyzer.AnalyzeFile(path);
+        if (stats == null) return;
+
+        Console.WriteLine("\n=== Estatísticas ===");
+        Console.WriteLine($"Total de linhas: {stats.TotalLines}");
+        Console.WriteLine($"Total de palavras: {stats.TotalWords}");
+        Console.WriteLine($"Total de caracteres: {stats.TotalChars}");
+
+        Console.WriteLine("\nTop 10 palavras mais usadas:");
+        foreach (var item in analyzer.GetTopWords(10))
+        {
+            Console.WriteLine($"{item.Key}: {item.Value}");
+        }
+
+        Console.Write("\nDeseja salvar o relatório? (s/n): ");
+        string resp = Console.ReadLine();
+        if (resp == "s")
+        {
+            Console.Write("Digite o caminho para salvar o relatório: ");
+            string output = Console.ReadLine();
+            analyzer.SaveReport(output);
+        }
+    }
+}
