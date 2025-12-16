@@ -1,0 +1,7 @@
+Javascript
+
+>criar arquivo .js
+>sempre apertar ctrl + s para salvar e executar
+>abrir o terminal
+>colocar na pasta do arquivo, caso não esteja
+>para executar, colocar o nome da pasta o exercicio, exemplo: node exercicio.js
