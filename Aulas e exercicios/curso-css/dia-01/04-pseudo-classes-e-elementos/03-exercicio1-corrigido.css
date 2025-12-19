@@ -1,0 +1,19 @@
+/* Muda a cor dos links ao passar o mouse */
+a:hover {
+  color: red;
+}
+
+/* Muda a cor dos links visitados */
+a:visited {
+  color: green;
+}
+
+/* Destaca o primeiro link da lista */
+li:first-child a {
+  background-color: gray;
+}
+
+/* Adiciona um ícone de seta antes de cada link */
+a::before {
+  content: "→ ";
+}

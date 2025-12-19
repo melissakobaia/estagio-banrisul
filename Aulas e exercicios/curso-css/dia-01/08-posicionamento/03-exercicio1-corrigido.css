@@ -1,0 +1,11 @@
+.item-a {
+    display: inline;
+}
+
+.item-b {
+    display: inline-block;
+}
+
+.item-c {
+    display: none;
+}

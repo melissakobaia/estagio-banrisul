@@ -1,0 +1,25 @@
+/* Define a cor de fundo da página e centraliza todo o texto*/
+body {
+    background-color: #f0f8ff; 
+    text-align: center;        
+}
+
+/* Altera a cor dos títulos */
+h1 {
+    color: #173AEB; 
+}
+
+h2 {
+    color: #FC9642; 
+}
+
+/* Parágrafos */
+p {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+}
+
+/* Palavra destacada */
+span {
+    font-style: italic;
+}

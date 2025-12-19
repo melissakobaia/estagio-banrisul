@@ -1,0 +1,21 @@
+/* Remove margens e espaçamentos padrões do navegador */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Centraliza o texto e aplica cor azul aos títulos h1 e h2 */
+h1, h2 {
+  text-align: center;
+  color: blue;
+}
+
+/* Todos os <li> dentro de uma <ul> têm fundo cinza */
+ul li {
+  background-color: gray;
+}
+
+/* Todos os <li> filhos diretos de uma <ul> têm texto azul */
+ul > li {
+  color: blue;
+}

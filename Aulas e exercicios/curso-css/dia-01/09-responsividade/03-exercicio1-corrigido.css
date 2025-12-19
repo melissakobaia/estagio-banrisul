@@ -1,0 +1,28 @@
+
+/* 1. Cards em coluna abaixo de 768px */
+@media (max-width: 768px) {
+  .menu {
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* 2. Tamanho da fonte do título */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* 3. Padding reduzido no main */
+@media (max-width: 600px) {
+  main {
+    padding: 10px;
+  }
+}
